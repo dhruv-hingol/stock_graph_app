@@ -56,8 +56,8 @@ function StockNews() {
           <h1>loading</h1>
         ) : (
           <Box>
-            {newsData.map((item) => (
-              <CardContent sx={{ borderTop: "0.5px solid black" }}>
+            {newsData.map((item, i) => (
+              <CardContent sx={{ borderTop: "0.5px solid black" }} key={i}>
                 <Typography onClick={() => handleNews(item.articlesName)}>
                   {item.articlesName}
                 </Typography>

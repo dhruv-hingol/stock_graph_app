@@ -1,14 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 import axios from "axios";
-import {
-  Box,
-  TextField,
-  CardContent,
-  Typography,
-  CardActions,
-  Card,
-} from "@mui/material";
+import { Box, TextField, CardContent, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { useQuery } from "react-query";
 import moment from "moment";
@@ -21,7 +14,7 @@ function Stock() {
   const [selectedStock, setSelectedStock] = useState("AACG");
   const [callApi, setCallApi] = useState(false);
   const [search, setSearch] = useState("");
-  const [stockTime, setStockTime] = useState("1h");
+  const [stockTime, setStockTime] = useState("15min");
   const columns = [
     {
       headerName: "Symbol",
@@ -105,6 +98,7 @@ function Stock() {
     setCallApi(true);
     refetch();
     currentPriceRefetch();
+    console.log("----", stock);
   };
   const series = [
     {
@@ -122,7 +116,7 @@ function Stock() {
     chart: {
       id: "trading",
       type: "candlestick",
-      height: 350,
+      height: 550,
     },
     title: {
       text: selectedStock.name,
@@ -289,7 +283,7 @@ function Stock() {
               <H1>loading</H1>
             ) : (
               <DataGrid
-                rows={data}
+                rows={data?.filter((el) => el.name.includes(search))}
                 columns={columns}
                 getRowId={(row) => row.symbol}
                 onRowClick={handleRowClick}

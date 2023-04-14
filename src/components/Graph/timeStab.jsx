@@ -1,7 +1,7 @@
 export const time = [
   {
     id: 1,
-    time: "10min",
+    time: "15min",
   },
   {
     id: 2,
