@@ -3,8 +3,8 @@ import Chart from "react-apexcharts";
 import axios from "axios";
 import {
   Box,
-  CardContent,
   TextField,
+  CardContent,
   Typography,
   CardActions,
   Card,
@@ -15,9 +15,10 @@ import moment from "moment";
 import { H1, P, Ul, Li } from "./style";
 import { time } from "../Graph/timeStab";
 import "./style.css";
+import StockNews from "../StockNews";
 
 function Stock() {
-  const [selectedStock, setSelectedStock] = useState("");
+  const [selectedStock, setSelectedStock] = useState("AACG");
   const [callApi, setCallApi] = useState(false);
   const [search, setSearch] = useState("");
   const [stockTime, setStockTime] = useState("1h");
@@ -25,6 +26,7 @@ function Stock() {
     {
       headerName: "Symbol",
       field: "name",
+      flex: 1,
     },
   ];
 
@@ -102,48 +104,31 @@ function Stock() {
     setSelectedStock(projectId);
     setCallApi(true);
     refetch();
-    // currentPriceRefetch();
+    currentPriceRefetch();
   };
   const series = [
     {
       name: "price",
-      // data: ["10", "20"],
-      data: stockData ? stockData.map((item) => item.close) : [],
-      color: "green",
+      data: stockData
+        ? stockData.map((item) => ({
+            x: item.datetime,
+            y: [item.open, item.high, item.low, item.close],
+          }))
+        : [],
     },
   ];
 
   const options = {
     chart: {
       id: "trading",
+      type: "candlestick",
+      height: 350,
     },
     title: {
       text: selectedStock.name,
       style: {
         color: "grey",
       },
-    },
-    stroke: {
-      curve: "smooth",
-      color: "black",
-    },
-    theme: {
-      palette: "palette1", // upto palette10
-    },
-    fill: {
-      type: "pattern",
-      pattern: {
-        style: "verticalLines",
-        width: 5,
-        height: 5,
-        strokeWidth: 4,
-        color: "pink",
-      },
-    },
-    markers: {
-      size: 1.5,
-      // markerColor: "black",
-      colors: ["#E91E63"],
     },
     xaxis: {
       type: "datetime",
@@ -152,18 +137,21 @@ function Stock() {
         : [],
       reverse: false,
     },
+    yaxis: {
+      tooltip: {
+        enabled: true,
+      },
+    },
   };
 
   const handleSearch = (event) => {
     setSearch(event.target.value);
-    console.log("----", time);
   };
 
   const handleStockTime = (time) => {
     setStockTime(time);
     refetch();
     currentPriceRefetch();
-    console.log("heelo");
   };
   return (
     <Box
@@ -172,7 +160,6 @@ function Stock() {
         width: "100%",
         margin: "0.5rem",
         marginTop: "0",
-        background: "linear-gradient(210deg,lightpink, white)",
       }}
     >
       <Box
@@ -184,8 +171,30 @@ function Stock() {
           justifyContent: "space-between",
         }}
       >
-        <Box sx={{ width: "10%" }}>
-          <h1>hello</h1>
+        <Box
+          sx={{
+            width: "18%",
+            height: "100%",
+            margin: "0rem",
+            background: "white",
+            // border: "1px solid black",
+            overflowY: "auto",
+            cursor: "pointer",
+            boxShadow: "2px 2px 5px grey",
+            "&::-webkit-scrollbar": {
+              width: 1,
+              height: 1,
+            },
+            "&::-webkit-scrollbar-thumb": {
+              backgroundColor: "transparent",
+              borderRadius: 4,
+            },
+            "&::-webkit-scrollbar-track": {
+              backgroundColor: "transparent",
+            },
+          }}
+        >
+          <StockNews />
         </Box>
         <Box
           sx={{
@@ -231,7 +240,7 @@ function Stock() {
               series={series}
               width={900}
               height={500}
-              type="line"
+              type="candlestick"
             />
           </Box>
           <Box display="flex" sx={{ justifyContent: "flex-end" }}>
@@ -241,11 +250,15 @@ function Stock() {
               </Ul>
             ))}
           </Box>
+          {/* <Box sx={{ textAlign: "center" }}> */}
+          {/* <h1>developed by dhruv hingol</h1> */}
+          {/* </Box> */}
         </Box>
         <Box
           display="flex"
           sx={{
             marginTop: "1rem",
+            marginRight: "1rem",
             height: "95%",
             width: "20%",
             // width: "contents",
@@ -285,6 +298,8 @@ function Stock() {
                 alignCenter={true}
                 m={0}
                 sx={{
+                  headerAlign: "center",
+                  fontWeight: "bold",
                   height: "80%",
                   width: "100%",
                   "& .MuiDataGrid-cell--textCenter": {
