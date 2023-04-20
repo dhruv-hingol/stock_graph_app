@@ -24,15 +24,15 @@ Start the development server using npm start
 Open http://localhost:3000 to view the app in the browser.
 
 Screenshots
+
 Stock Graph App Screenshot 1
-![Screenshot from 2023-04-20 11-54-09](https://user-images.githubusercontent.com/87244156/233279616-53aad4d9-f1c3-416a-884f-c1b8b349971f.png)
+![Screenshot from 2023-04-20 12-10-33](https://user-images.githubusercontent.com/87244156/233281456-2e8abe63-8fb0-4ae6-9d5a-21fc8c07fdf7.png)
 
 Stock Graph App Screenshot 2
-![Screenshot from 2023-04-20 11-54-27](https://user-images.githubusercontent.com/87244156/233279651-cfae260f-f9c3-480a-be38-b894d6ca0ded.png)
+![Screenshot from 2023-04-20 12-10-44](https://user-images.githubusercontent.com/87244156/233281477-a10df5b5-3338-410b-a643-25e539a66126.png)
 
 Stock Graph App Screenshot 3
-![Screenshot from 2023-04-20 11-54-33](https://user-images.githubusercontent.com/87244156/233279688-17384b68-26cf-429d-b0ae-2bcdcd8db2df.png)
-
+![Uploading Screenshot from 2023-04-20 12-10-52.png…]()
 
 Future Improvements
 Add authentication and user-specific watchlist and preferences.
