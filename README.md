@@ -1,5 +1,4 @@
 # stock_graph_app
-Stock Graph App
 
 This is a web application that allows users to search for stocks and view their historical data in the form of candlestick charts using ApexCharts. The application uses Axios to fetch stock data from a third-party API and the useQuery hook from the React Query library to manage the data.
 
@@ -32,7 +31,8 @@ Stock Graph App Screenshot 2
 ![Screenshot from 2023-04-20 12-10-44](https://user-images.githubusercontent.com/87244156/233281477-a10df5b5-3338-410b-a643-25e539a66126.png)
 
 Stock Graph App Screenshot 3
-![Uploading Screenshot from 2023-04-20 12-10-52.png…]()
+![Screenshot from 2023-04-20 12-10-52](https://user-images.githubusercontent.com/87244156/233281843-63b425e5-ab5f-4ab8-b89f-e5ddbc5afd1e.png)
+
 
 Future Improvements
 Add authentication and user-specific watchlist and preferences.
